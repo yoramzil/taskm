@@ -51,12 +51,22 @@ define('tasks-client/components/task-body', ['exports'], function (exports) {
 				this.sendAction('taskComplete', task);
 			}
 		}
-		// count: 1,
-		// odd: function () {
-		// 	this.count++;
-		// 	console.log(this.count);
-		// 	return this.count%2;
-		// }.property('content.count').property('content.odd'),
+	});
+});
+define('tasks-client/components/task-footer', ['exports'], function (exports) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = Ember.Component.extend({
+		done: 0,
+		open: 0,
+		didRender: function didRender() {
+			this._super.apply(this, arguments);
+			this.set('done', $('div.check_task_done').length);
+			this.set('open', $('div.tasks_check').not('.check_task_done').length);
+		}
 	});
 });
 define('tasks-client/components/task-header', ['exports'], function (exports) {
@@ -69,7 +79,6 @@ define('tasks-client/components/task-header', ['exports'], function (exports) {
 
 		actions: {
 			open_tasks_add: function open_tasks_add(event) {
-				// console.log($(event.path[0]).html());
 				$('#input_task').show();
 			}
 		}
@@ -516,15 +525,44 @@ define('tasks-client/routes/tasks', ['exports'], function (exports) {
 	});
 	exports.default = Ember.Route.extend({
 		model: function model() {
-			return this.store.findAll('task');
+			var total = null;
+			var completed = null;
+			var open = null;
+
+			// this.get('store').query('task', {
+			//   filter: {
+			//     done: 1
+			//   }
+			// }).then(function(recs) {
+			//   completed = recs;
+			// }).then(
+			// 	this.get('store').query('task', {
+			// 	  filter: {
+			// 	    done: 0
+			// 	  }
+			// })).then(function(recs) {
+			//   open = recs;
+			// }).then(
+			// 	total = this.store.findAll('task')
+			// ).then(
+			// 	return {
+			// 		total: total,
+			// 		completed: completed,
+			// 		open: open
+			// 	}
+			// );
+
+			total = this.store.findAll('task');
+
+			return {
+				total: total,
+				completed: completed,
+				open: open
+			};
 		},
 
 		actions: {
 			deleteTask: function deleteTask(task) {
-				debugger;
-				// task.deleteRecord();
-				// task.get('isDeleted');
-				// task.save(); 
 				task.destroyRecord();
 				setTimeout(function () {
 					location.reload();
@@ -542,7 +580,6 @@ define('tasks-client/routes/tasks', ['exports'], function (exports) {
 			},
 			taskComplete: function taskComplete(task) {
 				this.store.findRecord('task', task.get('id')).then(function (task) {
-					debugger;
 					var stat = task.get('done');
 					task.set('done', !stat);
 					task.save();
@@ -583,6 +620,14 @@ define("tasks-client/templates/components/task-body", ["exports"], function (exp
   });
   exports.default = Ember.HTMLBars.template({ "id": "3nB6YMYW", "block": "{\"symbols\":[\"taskitem\",\"index\"],\"statements\":[[6,\"div\"],[9,\"class\",\"tasks_body\"],[7],[0,\"\\n\\t\"],[6,\"ul\"],[9,\"class\",\"tasks_list\"],[7],[0,\"\\n\"],[4,\"each\",[[20,[\"tasks\"]]],null,{\"statements\":[[0,\"\\t\\t\\t\"],[1,[25,\"task-item\",null,[[\"task\",\"ind\",\"odd\",\"deleteTask\",\"taskComplete\",\"task\"],[[19,1,[]],[19,2,[]],[19,0,[\"odd\"]],\"deleteTask\",\"taskComplete\",[20,[\"task\"]]]]],false],[0,\"\\n\"]],\"parameters\":[1,2]},null],[0,\"\\t\"],[8],[0,\"\\n\"],[8]],\"hasEval\":false}", "meta": { "moduleName": "tasks-client/templates/components/task-body.hbs" } });
 });
+define("tasks-client/templates/components/task-footer", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "eaTRXWa1", "block": "{\"symbols\":[],\"statements\":[[6,\"table\"],[9,\"class\",\"task_footer_table\"],[7],[0,\"\\n\\t\"],[6,\"tr\"],[7],[0,\"\\n\\t\\t\"],[6,\"td\"],[7],[0,\"לסיום: \"],[1,[18,\"open\"],false],[8],[0,\"\\n\\t\\t\"],[6,\"td\"],[7],[0,\"הושלמו: \"],[1,[18,\"done\"],false],[8],[0,\"\\n\\t\\t\"],[6,\"td\"],[7],[0,\"סהכ: \"],[1,[20,[\"tasks\",\"length\"]],false],[8],[0,\"\\n\\t\"],[8],[0,\"\\n\"],[8]],\"hasEval\":false}", "meta": { "moduleName": "tasks-client/templates/components/task-footer.hbs" } });
+});
 define("tasks-client/templates/components/task-header", ["exports"], function (exports) {
   "use strict";
 
@@ -621,7 +666,7 @@ define("tasks-client/templates/tasks", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "jE6SXL/C", "block": "{\"symbols\":[],\"statements\":[[6,\"div\"],[9,\"class\",\"tasks_container\"],[7],[0,\"\\n\\t\"],[1,[18,\"task-header\"],false],[0,\"\\n\\t\"],[1,[25,\"task-body\",null,[[\"tasks\",\"deleteTask\",\"taskComplete\",\"task\"],[[20,[\"model\"]],\"deleteTask\",\"taskComplete\",[20,[\"task\"]]]]],false],[0,\"\\n\\t\"],[1,[25,\"task-input\",null,[[\"tasks\",\"createTask\"],[[20,[\"model\"]],\"createTask\"]]],false],[0,\"\\n\"],[8],[0,\"\\n\\n\"]],\"hasEval\":false}", "meta": { "moduleName": "tasks-client/templates/tasks.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "5jcBtYz0", "block": "{\"symbols\":[],\"statements\":[[6,\"div\"],[9,\"class\",\"tasks_container\"],[7],[0,\"\\n\\t\"],[1,[18,\"task-header\"],false],[0,\"\\n\\t\"],[1,[25,\"task-body\",null,[[\"tasks\",\"deleteTask\",\"taskComplete\",\"task\"],[[20,[\"model\",\"total\"]],\"deleteTask\",\"taskComplete\",[20,[\"task\"]]]]],false],[0,\"\\n\\t\"],[1,[25,\"task-input\",null,[[\"tasks\",\"createTask\"],[[20,[\"model\",\"total\"]],\"createTask\"]]],false],[0,\"\\n\\t\"],[1,[25,\"task-footer\",null,[[\"tasks\"],[[20,[\"model\",\"total\"]]]]],false],[0,\"\\n\"],[8],[0,\"\\n\\n\"]],\"hasEval\":false}", "meta": { "moduleName": "tasks-client/templates/tasks.hbs" } });
 });
 define('tasks-client/tests/mirage/mirage.lint-test', [], function () {
   'use strict';

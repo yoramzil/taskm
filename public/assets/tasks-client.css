@@ -99,3 +99,5 @@ ul.tasks_list { margin-top: 0em; max-height: 300px; overflow-y: auto; }
 
 .check_task_done { background-color: rgba(0,0,0,.7) !important; }
 .task_text_done { text-decoration: line-through; }
+.task_footer_table { width: 100%; }
+.task_footer_table td { min-width: 33%; font-size: .5em; }

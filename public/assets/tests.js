@@ -20,9 +20,14 @@ define('tasks-client/tests/app.lint-test', [], function () {
     assert.ok(false, 'components/task-body.js should pass ESLint\n\n7:4 - Use closure actions, unless you need bubbling (ember/closure-actions)\n10:4 - Use closure actions, unless you need bubbling (ember/closure-actions)');
   });
 
+  QUnit.test('components/task-footer.js', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/task-footer.js should pass ESLint\n\n8:20 - Do not use global `$` or `jQuery` (ember/no-global-jquery)\n8:20 - \'$\' is not defined. (no-undef)\n9:20 - Do not use global `$` or `jQuery` (ember/no-global-jquery)\n9:20 - \'$\' is not defined. (no-undef)');
+  });
+
   QUnit.test('components/task-header.js', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/task-header.js should pass ESLint\n\n6:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n6:20 - \'event\' is defined but never used. (no-unused-vars)\n7:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n8:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n8:6 - Do not use global `$` or `jQuery` (ember/no-global-jquery)\n8:6 - \'$\' is not defined. (no-undef)\n9:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)');
+    assert.ok(false, 'components/task-header.js should pass ESLint\n\n6:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n6:20 - \'event\' is defined but never used. (no-unused-vars)\n7:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n7:6 - Do not use global `$` or `jQuery` (ember/no-global-jquery)\n7:6 - \'$\' is not defined. (no-undef)\n8:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)');
   });
 
   QUnit.test('components/task-input.js', function (assert) {
@@ -62,7 +67,7 @@ define('tasks-client/tests/app.lint-test', [], function () {
 
   QUnit.test('routes/tasks.js', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'routes/tasks.js should pass ESLint\n\n8:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n9:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n9:8 - Unexpected \'debugger\' statement. (no-debugger)\n10:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n17:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n18:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n19:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n20:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n21:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n27:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n28:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n30:6 - Unexpected \'debugger\' statement. (no-debugger)\n31:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n32:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n33:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n34:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n38:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n39:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)');
+    assert.ok(false, 'routes/tasks.js should pass ESLint\n\n41:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n46:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n47:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n48:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n49:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n50:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n56:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n57:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n59:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n60:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n61:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n62:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n66:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n67:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)');
   });
 });
 define('tasks-client/tests/helpers/destroy-app', ['exports'], function (exports) {
@@ -151,6 +156,35 @@ define('tasks-client/tests/integration/components/task-body-test', ['ember-qunit
     this.render(Ember.HTMLBars.template({
       "id": "rqm1jiy+",
       "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"task-body\",null,null,{\"statements\":[[0,\"      template block text\\n\"]],\"parameters\":[]},null],[0,\"  \"]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('tasks-client/tests/integration/components/task-footer-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('task-footer', 'Integration | Component | task footer', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template({
+      "id": "l1w+iIIw",
+      "block": "{\"symbols\":[],\"statements\":[[1,[18,\"task-footer\"],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template({
+      "id": "im7Puhqi",
+      "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"task-footer\",null,null,{\"statements\":[[0,\"      template block text\\n\"]],\"parameters\":[]},null],[0,\"  \"]],\"hasEval\":false}",
       "meta": {}
     }));
 
@@ -294,6 +328,11 @@ define('tasks-client/tests/tests.lint-test', [], function () {
   QUnit.test('integration/components/task-body-test.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'integration/components/task-body-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('integration/components/task-footer-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/task-footer-test.js should pass ESLint\n\n');
   });
 
   QUnit.test('integration/components/task-header-test.js', function (assert) {
