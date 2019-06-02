@@ -1,0 +1,101 @@
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
+
+body {
+    direction: rtl;
+    text-align: right;
+    font-size: 2em;
+    font-family: OpenSans, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+ul.tasks_list { margin-top: 0em; max-height: 300px; overflow-y: auto; }
+
+.tasks_container { width: 300px; margin-left: auto; margin-right: auto; margin-top: 100px; }
+.tasks_header { 
+	background-image: linear-gradient(rgba(249, 198, 109, 1), rgba(209, 162, 81, 1)); 
+	padding: 0px 10px; 
+	position: relative;
+	line-height: 2em;
+}
+.tasks_header .tasks_add { 
+	float: left; 
+	width: 3em; 
+	height: 3em; 
+	border: 1px solid rgba(0,0,0,.3); 
+	border-radius: 8px; 
+	background-color: rgba(255, 255, 255, 1);
+	position: relative; 
+	top: .75em;
+}
+.tasks_header .tasks_add .tasks_add_inner { 
+	height: 1em;
+	width: 1em;
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: 50%;
+	display: inline-block;
+	margin-left: auto; 
+	margin-right: auto;
+	position: relative;
+	left: 1px;
+	font-size: 2em
+}
+.tasks_list { list-style-type: none; padding-right: 0; width: 300px;}
+.tasks_item { position: relative; line-height: 2em; border-bottom: 1px solid rgba(0,0,0,0.3); }
+.tasks_text {}
+.tasks_item .tasks_text { padding-right: 10px; }
+.tasks_item .tasks_check { 
+	display: inline-block; 
+	width: .5em; 
+	height: .5em; 
+	border: 1px solid rgba(0,0,0,.3); 
+	border-radius: 3px; 
+	position: relative; 
+	background-color: rgba(255,255,255,1);
+	cursor: pointer;
+}
+.tasks_item .tasks_check:hover { background-color: rgba(0,0,0,.7) !important; }
+.tasks_item .tasks_delete { float: left; padding-left: 10px; cursor: pointer; font-weight: bolder; font-size: .6em; }
+.tasks_item .tasks_check.checked { background-color: rgba(0,0,0,.7) !important; }
+
+#input_task { 
+	/*position: relative; */
+	width: 300px;
+	border: 1px solid rgba(0,0,0,.3); 
+	border-radius: 5px; z-index: 100; 
+	line-height: 2em; 
+	text-align: center;
+	display: none;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#input_task_close {
+	font-size: 12px;
+	line-height: 12px;
+	width: 12px;
+	height: 12px;
+	font-weight: bold;
+	position: absolute;
+	left: 3px;
+	top: 2px;
+	cursor: pointer;
+	color: rgba(255,255,255,.9);
+	background-color: rgba(0,0,0,.5);
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: 50%;
+	display: inline-block;
+	text-align: center;
+}
+
+.centered {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.odd { background-color: rgba(0,0,0,.3); }
+
+.check_task_done { background-color: rgba(0,0,0,.7) !important; }
+.task_text_done { text-decoration: line-through; }
